@@ -5,6 +5,7 @@
 * rest.js : that library comes with HAL support.
 * follow() function makes it possible  now to start from the root and navigate to where requested!
 * Reload the entire list of employees when the page size is updated.
+
 * Read Only.  
 * The web page is Not Dynamic. Need to refresh manually.  
     
