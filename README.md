@@ -1,6 +1,10 @@
-#Spring and React Web Application Part1  
-#Source Document : [React.js and Spring Data REST :: Part 1 - Basic Features ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
+#Spring and React Web Application Part2 
+#Source Document : [React.js and Spring Data REST :: Part 2 - Hypermedia Controls ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
 ##Reference Document : Self Summary on [React.js and Spring Data REST :: Part 1 - Basic Features ](https://drive.google.com/open?id=1gZ0V8kqUy3ovYW8dx-2-uph2Zi7mYbl0KDQj5FaFoG4 "Example Sources by tudoistube@gmail" )  
+* Repository interface extends PagingAndSortingRepository which adds extra options to set page size, and also adds navigational links to hop from page to page.
+* rest.js : that library comes with HAL support.
+* follow() function makes it possible  now to start from the root and navigate to where requested!
+* Reload the entire list of employees when the page size is updated.
 * Read Only.  
 * The web page is Not Dynamic. Need to refresh manually.  
     
