@@ -8,7 +8,6 @@
 * Reload the entire list of employees when the page size is updated.    
 * CRUD.  
 * Changes in one tab won’t update anything in the other.  
-* The web page is Not Dynamic. Need to refresh manually.  
     
 책 보면서 실습한 소스임.  
 공부하면서 올리는 것이어서 틀린 부분이 있을수도 있음(알려주시면 반영하겠음)  
