@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ZspringReact2Application {
+public class ZspringReact4Part01Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ZspringReact2Application.class, args);
+		SpringApplication.run(ZspringReact4Part01Application.class, args);
 	}
 }

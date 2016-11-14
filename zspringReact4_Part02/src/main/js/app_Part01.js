@@ -22,54 +22,6 @@ class App extends React.Component {
 		this.state = {employees: []};
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //...componentDidMount : React 가 DOM 에 있는 컴포넌트를 렌더링한 후 호출되는 API 임.
 //...App 컴포넌트에서, employee 배열이 Spring Data REST 백엔드에 의해서 가져와지고
 //   App 컴포넌트의 state 값에 저장이 됨.	
