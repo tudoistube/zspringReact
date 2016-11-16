@@ -2,7 +2,7 @@
 
 //...webpack 을 이용하여 조합을 하므로, 필요한 모듈을 불러옴.
 const React = require('react');
-const ReactDOM = require('react-dom')
+const ReactDOM = require('react-dom');
 //...client is custom code that configures rest.js to include support for 
 //   HAL, URI Templates, and other things. 
 //   It also sets the default Accept request header to application/hal+json. 
@@ -215,6 +215,12 @@ class CreateDialog extends React.Component {
 		var inputs = this.props.attributes.map(attribute =>
 //...key : React 가 복수의 자식 노드를 구분하는데 필요한 단순한 텍스트 기반의 항목 필드임.
 //   ref : React 는 name 이 아닌 ref 로 특정한 DOM 노드를 가지는 메커니즘임.
+//...★CreateDialog  콤포넌트가 App 콤포넌트로 부터 건네받은 속성 attributes 는
+//   App 콤포넌트의  loadFromServer(pageSize) 함수에서 schema.entity 의 값에서
+//   schema.properties 의 값을 Object.keys 로  받은 값이고, 실제 DOM 에 접근하기 위해서
+//   render 부분에서  각 input 태그의 식별값 용도인 ref 에 attribute 를 담고,
+//   handleSubmit 은 그렇게 생성된 input 태그의 실제 DOM 엘리먼트를 얻기 위해
+//   React.findDOMNode() 를 사용하여 얻음.
 			<p key={attribute}>
 				<input type="text" placeholder={attribute} 
 				                   ref={attribute} 
@@ -223,7 +229,7 @@ class CreateDialog extends React.Component {
 		);
 
 //...최상위의 div 는 대화상자를 여는 버튼에 관한 앵커 태그임.
-//   내장된 div 는 감춰진 대화상자임.
+//   내장된 id="modalDialog" 인 div 는 감춰진 대화상자임.
 //	 이 예제에서는 자바스크립트가 아닌 순수한 HTML5 와 CSS3 를 사용함.
 		return (
 			<div>
