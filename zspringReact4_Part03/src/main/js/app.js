@@ -1,86 +1,52 @@
 'use strict';
 
-//...webpack 을 이용하여 조합을 하므로, 필요한 모듈을 불러옴.
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-const when = require('when'); //...added since Part03.
+const when = require('when');//...added since Part03.
 
 //...client is custom code that configures rest.js to include support for 
-//HAL, URI Templates, and other things. 
-//It also sets the default Accept request header to application/hal+json. 
-//You can read the code here.
+//   HAL, URI Templates, and other things. 
+//   It also sets the default Accept request header to application/hal+json. 
+//   You can read the code here.
 const client = require('./client');
 
-//function to hop multiple links by "rel"
-const follow = require('./follow'); 
+const follow = require('./follow'); // function to hop multiple links by "rel"
 
-//...유일하게 하드코딩할 경로임.
 const root = '/api';
 //...E.require___________________________________________________________________
 
-
-//...컴포넌트를 정의하는 것에 기초하는 것이 React 임.
-//   하나의 컴포넌트가 여러개의 인스턴스를 담는 부모-자식 관계로 여러 층으로 
-//   확장하기에 쉬운 개념임.
-//   먼저, 모든 컴포넌트들에 대한 최상위 컨테이너를 갖는 것이 용이함.
-//...React.createClass({…​}) : React 컴포넌트를 생성하는 메서드임.
 class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {employees: [] 
-//...S.PagingAndSortingRepository 사용으로 추가함.		
-						,attributes: [] 
-						,pageSize: 2 
-						,links: {}};
+		this.state = {employees: [], attributes: [], pageSize: 2, links: {}};
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
-		this.onUpdate = this.onUpdate.bind(this);//...added since Part03.
+		this.onUpdate = this.onUpdate.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
-//...E.PagingAndSortingRepository 사용으로 추가함.	
 	}//...E.constructor(props).	
-
+	
 	componentDidMount() {
 		this.loadFromServer(this.state.pageSize);
 	}//...E.componentDidMount().	
-	
+
 	loadFromServer(pageSize) {
-/*...before :
-		follow(client, root, [
-			{rel: 'employees', params: {size: pageSize}}]
-		).then(employeeCollection => {
-			return client({
-				method: 'GET',
-				path: employeeCollection.entity._links.profile.href,
-				headers: {'Accept': 'application/schema+json'}
-			}).then(schema => {
-				this.schema = schema.entity;
-				return employeeCollection;
-			});
-		}).done(employeeCollection => {
-			this.setState({
-				employees: employeeCollection.entity._embedded.employees,
-				attributes: Object.keys(this.schema.properties),
-				pageSize: pageSize,
-				links: employeeCollection.entity._links});
-		});
-...after : */
 /*...follow() 함수는 employees 컬렉션 자원에 접근함.
 //...follow.js 함수 사용으로 root 에서 바로 시작해서 필요한 곳으로 네비게이트 가능함.
 //...client : REST 호출을 하는데 이용되는 객체임.
 //...Data 는 rest.js 인자인 client 를 통해서 로딩됨.		
 //   root : 시작하는 root URI.
 //   an array of relationships to navigate along. 
-//		 Each one can be a string or an object.
+//				 Each one can be a string or an object.
 //   The array of relationships can be as simple as ["employees"], 
 //   meaning when the first call is made, look in _links for the relationship (or rel) 
 //   named employees. 
 //   Find its href and navigate to it. 
-//   If there is another relationship in the array, rinse and repeat.*/		
+//   If there is another relationship in the array, rinse and repeat.*/				
 		follow(client, root, [
-/*...'?size=<pageSize>' 는 rel 에 끼울 수 있는 쿼리 변수임.	*/
+/*...'?size=<pageSize>' 는 rel 에 끼울 수 있는 쿼리 변수임.	*/			
 			{rel: 'employees', params: {size: pageSize}}]
 /*...(employeeCollection =>) 구문은 JSON 스키마 데이터에 대한 호출을 생성시킴.
 //   이 구문의 부수적인 'then' 구문은 메타데이터와 <App/> 컴포넌트에 있는
@@ -131,21 +97,6 @@ class App extends React.Component {
 
 
 	onCreate(newEmployee) {
-/*...before :	
-		follow(client, root, ['employees']).then(employeeCollection => {
-			return client({
-				method: 'POST',
-				path: employeeCollection.entity._links.self.href,
-				entity: newEmployee,
-				headers: {'Content-Type': 'application/json'}
-			})
-		}).then(response => {
-			return follow(client, root, [
-				{rel: 'employees', params: {'size': this.state.pageSize}}]);
-		}).done(response => {
-			this.onNavigate(response.entity._links.last.href);
-		});
-...after: */			
 		var self = this;
 //...follow() 함수는 POST 작업이 이뤄지는 employees 자원에 대해 네비게이트하는 함수이고,
 //   이 경우, 어떠한 변수를 적용할 필요가 없었고, 그래서 스트링 기반의 배열인 rels 이면 충분함.
@@ -169,7 +120,7 @@ class App extends React.Component {
 		});
 	}//...E.onCreate(newEmployee).		
 
-	
+
 	onUpdate(employee, updatedEmployee) {
 		client({
 			method: 'PUT',
@@ -203,16 +154,6 @@ class App extends React.Component {
 //  page control 을 사용했음.
 //  이용가능한 네비게이션 링크를 근거로 동적으로 컨트롤을 조정하여 페이지 이동을 할 수 있어서 편리함.	
 	onNavigate(navUri) {
-/*...before :	
-		client({method: 'GET', path: navUri}).done(employeeCollection => {
-			this.setState({
-				employees: employeeCollection.entity._embedded.employees,
-				attributes: this.state.attributes,
-				pageSize: this.state.pageSize,
-				links: employeeCollection.entity._links
-			});
-		});
-...after: */			
 		client({
 			method: 'GET',
 			path: navUri
@@ -245,9 +186,7 @@ class App extends React.Component {
 		}
 	}//...E.updatePageSize(pageSize).
 
-	
-//...render : 화면에 컴포넌트를 그리는 API 임.
-//...state 가 변경되면, render() 이 호출됨.	
+
 	render() {
 		return (
 			<div>
@@ -255,9 +194,9 @@ class App extends React.Component {
 				<EmployeeList employees={this.state.employees}
 							  links={this.state.links}
 							  pageSize={this.state.pageSize}
-							  attributes={this.state.attributes}/*...added since Part03.*/
+							  attributes={this.state.attributes} /*...added since Part03.*/
 							  onNavigate={this.onNavigate}
-							  onUpdate={this.onUpdate}/*...added since Part03.*/
+							  onUpdate={this.onUpdate} /*...added since Part03.*/
 							  onDelete={this.onDelete}
 							  updatePageSize={this.updatePageSize}/>
 			</div>
@@ -266,8 +205,9 @@ class App extends React.Component {
 }
 //...E.App___________________________________________________________________
 
+
 //...$ curl http://localhost:8080/api/profile/employees -H 'Accept:application/schema+json'
-//   의 실행결과에 나온 메타데이터를 가지고, UI 에 대한 다른 컨트롤을 추가할 수 있음.
+//  의 실행결과에 나온 메타데이터를 가지고, UI 에 대한 다른 컨트롤을 추가할 수 있음.
 //...handleSubmit(), render() 함수를 가짐.
 class CreateDialog extends React.Component {
 
@@ -285,37 +225,35 @@ class CreateDialog extends React.Component {
 		this.props.attributes.forEach(attribute => {
 //...this.refs : name 을 이용하여 특정한 React 컴포넌트를 잡는 방법임.
 //   단지 가상 DOM 컴포넌트를 얻음.
-//   실제 DOM 엘리먼트를 얻기 위해서는 React.findDOMNode() 를 이용함.
+//   실제 DOM 엘리먼트를 얻기 위해서는 React.findDOMNode() 를 이용함.			
 			newEmployee[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
 		});
 		
 //...onCreate() 콜백을 호출함.
 //   이 함수는 최상위 App.onCreate 내부에 있고 이 React 컴포넌트에 다른 속성으로 제공됐음.
 		this.props.onCreate(newEmployee);
-		
-		// clear out the dialog's inputs		
 		this.props.attributes.forEach(attribute => {
-			ReactDOM.findDOMNode(this.refs[attribute]).value = ''; 
+			ReactDOM.findDOMNode(this.refs[attribute]).value = ''; // clear out the dialog's inputs
 		});
 		
 		// Navigate away from the dialog to hide it.
 		window.location = "#";
 	}//...E.handleSubmit(e).
 
-//...attributes 속성에서 발견된 JSON 스키마 데이터에 대한 맵핑을 해서 이를 
-//	<p><input></p> 엘리먼트 배열형태로 변환함.
+/*...attributes 속성에서 발견된 JSON 스키마 데이터에 대한 맵핑을 해서 이를 
+//	<p><input></p> 엘리먼트 배열형태로 변환함.*/
 	render() {
 		var inputs = this.props.attributes.map(attribute =>
 //...key : React 가 복수의 자식 노드를 구분하는데 필요한 단순한 텍스트 기반의 항목 필드임.
 //   ref : React 는 name 이 아닌 ref 로 특정한 DOM 노드를 가지는 메커니즘임.
-			<p key={attribute}>
+		    <p key={attribute}>
 				<input type="text" placeholder={attribute} ref={attribute} className="field" />
 			</p>
 		);
 		
 //...최상위의 div 는 대화상자를 여는 버튼에 관한 앵커 태그임.
 //   내장된 div 는 감춰진 대화상자임.
-//		 이 예제에서는 자바스크립트가 아닌 순수한 HTML5 와 CSS3 를 사용함.
+//			 이 예제에서는 자바스크립트가 아닌 순수한 HTML5 와 CSS3 를 사용함.
 		return (
 			<div>
 				<a href="#createEmployee">Create</a>
@@ -393,6 +331,7 @@ class UpdateDialog extends React.Component {
 //...E.UpdateDialogadded since Part03.___________________________________________
 
 
+
 class EmployeeList extends React.Component {
 
 	constructor(props) {
@@ -421,34 +360,30 @@ class EmployeeList extends React.Component {
 		e.preventDefault();
 		this.props.onNavigate(this.props.links.last.href);
 	}//...E.handleNavigation.
-
-
+	
 	handleInput(e) {
-//...이벤트가 계층으로 부푸는것을 중지시킴.		
 		e.preventDefault();
 //...React 의 findDOMNode() 헬퍼함수를 통해서 <input> 태그의 ref 속성을 이용하여
-//   DOM 노드와 그것의 정확한 value 를 알아냄.
+//   DOM 노드와 그것의 정확한 value 를 알아냄.		
 		var pageSize = ReactDOM.findDOMNode(this.refs.pageSize).value;
 //...스트링의 숫자인지 확인하여서 입력값이 정말 숫자인지 확인함.
 //   만약 숫자라면, App 리액트 콤포넌트에 새로운 페이지 크기를 보내는 콜백을 촉발함.
-//   만약 숫자가 아니라면, 입력한 글자는 그냥 제거됨.
+//   만약 숫자가 아니라면, 입력한 글자는 그냥 제거됨.		
 		if (/^[0-9]+$/.test(pageSize)) {
 			this.props.updatePageSize(pageSize);
 		} else {
 			ReactDOM.findDOMNode(this.refs.pageSize).value = pageSize.substring(0, pageSize.length - 1);
 		}
 	}//...E.handleInput(e).	
-
 	
-	// tag::employee-list-render[]
 	render() {
 		var employees = this.props.employees.map(employee =>
-//...employee._links.self.href 와 employee 로 부터 값을 받음.	
+/*...employee._links.self.href 와 employee 로 부터 값을 받음.	
 //   (http://localhost:8080/api/employees/1)
 //...★Whenever you work with Spring Data REST, 
-//	 the self link IS the key for a given resource. 
+//		 the self link IS the key for a given resource. 
 //   React needs a unique identifer for child nodes, 
-//	 and _links.self.href is perfect.
+//		 and _links.self.href is perfect.*/		
 				<Employee key={employee.entity._links.self.href}
 						  employee={employee}
 						  attributes={this.props.attributes}
@@ -456,9 +391,9 @@ class EmployeeList extends React.Component {
 						  onDelete={this.props.onDelete}/>
 		);
 
-//...it still transforms this.props.employees into an array of <Element /> components. 
+/*...it still transforms this.props.employees into an array of <Element /> components. 
 //   Then it builds up an array of navLinks, an array of HTML buttons.
-//...HAL 실행결과 나타난 link 에 해당하는 주소 속성값 유무에 따라 해당 버튼을 만드는 것 같음.		
+//...HAL 실행결과 나타난 link 에 해당하는 주소 속성값 유무에 따라 해당 버튼을 만드는 것 같음.*/			
 		var navLinks = [];
 		if ("first" in this.props.links) {
 			navLinks.push(<button key="first" onClick={this.handleNavFirst}>&lt;&lt;</button>);
@@ -478,7 +413,7 @@ class EmployeeList extends React.Component {
 //   Spring Data REST 는 부드럽게 페이지 크기에 기반한 navigational links 를 변경함.
 //   ref="pageSize" : this.refs.pageSize 를 통해 엘리먼트를 가질 수 있음.
 //   defaultValue : 상태의 페이지크기를 초기화함.
-//   onInput : 이벤트 핸들러를 등록함.*/
+//   onInput : 이벤트 핸들러를 등록함.*/				
 			<div>
 				<input ref="pageSize" defaultValue={this.props.pageSize} onInput={this.handleInput}/>
 				<table>
@@ -495,7 +430,7 @@ class EmployeeList extends React.Component {
 				</table>
 				<div>
 {/*...React 는 XML 기반이므로, 왼쪽화살표태그(<)를 button태그 엘리먼트 안에 넣을 수 없으므로, 
-     인코드된 버전으로 사용해야함.*/}			
+ 인코드된 버전으로 사용해야함.*/}		
 					{navLinks}
 				</div>
 			</div>
@@ -532,7 +467,7 @@ class Employee extends React.Component {
 {/*...Employee 컴포넌트는 행의 마지막 항목에 삭제버튼을 보여줌.
 //...한 곳에서 가장 최상위 컴포넌트에서 state 를 관리하는 것이 가장 쉽다는 것을 보여줌.
 //   컴포넌트에 특화된 세부사항인(this.props.onDelete(this.props.employee)) 를 가진
-//   콜백을 촉발함으로써, 컴포넌트간의 행동을 지휘하기 아주 쉬움.*/}
+//   콜백을 촉발함으로써, 컴포넌트간의 행동을 지휘하기 아주 쉬움.*/}				
 					<button onClick={this.handleDelete}>Delete</button>
 				</td>
 			</tr>
