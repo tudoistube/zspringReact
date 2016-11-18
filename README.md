@@ -2,7 +2,7 @@
 #Source Document : [React.js and Spring Data REST :: Part 3 - Conditional Operations ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
 ##Reference Document : Self Summary on [React.js and Spring Data REST :: Part 2 - Basic Features ](https://drive.google.com/open?id=1gZ0V8kqUy3ovYW8dx-2-uph2Zi7mYbl0KDQj5FaFoG4 "Example Sources by tudoistube@gmail" )  
   
-* Issue 에 등록한 문제[JSON 스키마로 데이터를 받아오는 중 오류 처리 문의 ](https://github.com/tudoistube/zspringReact/issues/1 "Example Sources by tudoistube@gmail" )에 대해 조언을 구합니다.
+* Issue 에 등록한 문제[JSON 스키마로 데이터를 받아오는 중 오류 처리 문의 ](https://github.com/spring-guides/tut-react-and-spring-data-rest/issues/35#issuecomment-261316652 "Example Sources by tudoistube@gmail" )에 대해 조언을 구합니다.
 
     
 책 보면서 실습한 소스임.  
