@@ -97,6 +97,4 @@ public class Employee {
 				+ description + ", version=" + version + "]";
 	}
 	
-	
-	
 }

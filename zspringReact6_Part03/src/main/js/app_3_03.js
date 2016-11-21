@@ -1,9 +1,10 @@
 'use strict';
-
+//...from 3-03.
+//...webpack 을 이용하여 조합을 하므로, 필요한 모듈을 불러옴.
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-const when = require('when');//...added since Part03.
+const when = require('when'); //...added since Part03.
 
 //...client is custom code that configures rest.js to include support for 
 //   HAL, URI Templates, and other things. 
@@ -11,27 +12,40 @@ const when = require('when');//...added since Part03.
 //   You can read the code here.
 const client = require('./client');
 
-const follow = require('./follow'); // function to hop multiple links by "rel"
+//function to hop multiple links by "rel"
+const follow = require('./follow'); 
 
+//...유일하게 하드코딩할 경로임.
 const root = '/api';
 //...E.require___________________________________________________________________
 
+
+//...컴포넌트를 정의하는 것에 기초하는 것이 React 임.
+//   하나의 컴포넌트가 여러개의 인스턴스를 담는 부모-자식 관계로 여러 층으로 
+//   확장하기에 쉬운 개념임.
+//   먼저, 모든 컴포넌트들에 대한 최상위 컨테이너를 갖는 것이 용이함.
+//...React.createClass({…​}) : React 컴포넌트를 생성하는 메서드임.
 class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {employees: [], attributes: [], pageSize: 2, links: {}};
+		this.state = {employees: [] 
+//...S.PagingAndSortingRepository 사용으로 추가함.		
+						,attributes: [] 
+						,pageSize: 2 
+						,links: {}};
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
-		this.onUpdate = this.onUpdate.bind(this);
+		this.onUpdate = this.onUpdate.bind(this);//...added since Part03.
 		this.onDelete = this.onDelete.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
+//...E.PagingAndSortingRepository 사용으로 추가함.	
 	}//...E.constructor(props).	
-	
+
 	componentDidMount() {
 		this.loadFromServer(this.state.pageSize);
 	}//...E.componentDidMount().	
-
+	
 	loadFromServer(pageSize) {
 /*...follow() 함수는 employees 컬렉션 자원에 접근함.
 //...follow.js 함수 사용으로 root 에서 바로 시작해서 필요한 곳으로 네비게이트 가능함.
@@ -39,14 +53,14 @@ class App extends React.Component {
 //...Data 는 rest.js 인자인 client 를 통해서 로딩됨.		
 //   root : 시작하는 root URI.
 //   an array of relationships to navigate along. 
-//				 Each one can be a string or an object.
+//		 Each one can be a string or an object.
 //   The array of relationships can be as simple as ["employees"], 
 //   meaning when the first call is made, look in _links for the relationship (or rel) 
 //   named employees. 
 //   Find its href and navigate to it. 
-//   If there is another relationship in the array, rinse and repeat.*/				
+//   If there is another relationship in the array, rinse and repeat.*/		
 		follow(client, root, [
-/*...'?size=<pageSize>' 는 rel 에 끼울 수 있는 쿼리 변수임.	*/			
+/*...'?size=<pageSize>' 는 rel 에 끼울 수 있는 쿼리 변수임.	*/
 			{rel: 'employees', params: {size: pageSize}}]
 /*...(employeeCollection =>) 구문은 JSON 스키마 데이터에 대한 호출을 생성시킴.
 //   이 구문의 부수적인 'then' 구문은 메타데이터와 <App/> 컴포넌트에 있는
@@ -186,7 +200,9 @@ class App extends React.Component {
 		}
 	}//...E.updatePageSize(pageSize).
 
-
+	
+//...render : 화면에 컴포넌트를 그리는 API 임.
+//...state 가 변경되면, render() 이 호출됨.	
 	render() {
 		return (
 			<div>
@@ -207,7 +223,7 @@ class App extends React.Component {
 
 
 //...$ curl http://localhost:8080/api/profile/employees -H 'Accept:application/schema+json'
-//  의 실행결과에 나온 메타데이터를 가지고, UI 에 대한 다른 컨트롤을 추가할 수 있음.
+//   의 실행결과에 나온 메타데이터를 가지고, UI 에 대한 다른 컨트롤을 추가할 수 있음.
 //...handleSubmit(), render() 함수를 가짐.
 class CreateDialog extends React.Component {
 
@@ -225,15 +241,17 @@ class CreateDialog extends React.Component {
 		this.props.attributes.forEach(attribute => {
 //...this.refs : name 을 이용하여 특정한 React 컴포넌트를 잡는 방법임.
 //   단지 가상 DOM 컴포넌트를 얻음.
-//   실제 DOM 엘리먼트를 얻기 위해서는 React.findDOMNode() 를 이용함.			
+//   실제 DOM 엘리먼트를 얻기 위해서는 React.findDOMNode() 를 이용함.
 			newEmployee[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
 		});
 		
 //...onCreate() 콜백을 호출함.
 //   이 함수는 최상위 App.onCreate 내부에 있고 이 React 컴포넌트에 다른 속성으로 제공됐음.
 		this.props.onCreate(newEmployee);
+		
+		// clear out the dialog's inputs		
 		this.props.attributes.forEach(attribute => {
-			ReactDOM.findDOMNode(this.refs[attribute]).value = ''; // clear out the dialog's inputs
+			ReactDOM.findDOMNode(this.refs[attribute]).value = ''; 
 		});
 		
 		// Navigate away from the dialog to hide it.
@@ -364,11 +382,11 @@ class EmployeeList extends React.Component {
 	handleInput(e) {
 		e.preventDefault();
 //...React 의 findDOMNode() 헬퍼함수를 통해서 <input> 태그의 ref 속성을 이용하여
-//   DOM 노드와 그것의 정확한 value 를 알아냄.		
+//   DOM 노드와 그것의 정확한 value 를 알아냄.
 		var pageSize = ReactDOM.findDOMNode(this.refs.pageSize).value;
 //...스트링의 숫자인지 확인하여서 입력값이 정말 숫자인지 확인함.
 //   만약 숫자라면, App 리액트 콤포넌트에 새로운 페이지 크기를 보내는 콜백을 촉발함.
-//   만약 숫자가 아니라면, 입력한 글자는 그냥 제거됨.		
+//   만약 숫자가 아니라면, 입력한 글자는 그냥 제거됨.
 		if (/^[0-9]+$/.test(pageSize)) {
 			this.props.updatePageSize(pageSize);
 		} else {
@@ -413,7 +431,7 @@ class EmployeeList extends React.Component {
 //   Spring Data REST 는 부드럽게 페이지 크기에 기반한 navigational links 를 변경함.
 //   ref="pageSize" : this.refs.pageSize 를 통해 엘리먼트를 가질 수 있음.
 //   defaultValue : 상태의 페이지크기를 초기화함.
-//   onInput : 이벤트 핸들러를 등록함.*/				
+//   onInput : 이벤트 핸들러를 등록함.*/
 			<div>
 				<input ref="pageSize" defaultValue={this.props.pageSize} onInput={this.handleInput}/>
 				<table>
@@ -467,7 +485,7 @@ class Employee extends React.Component {
 {/*...Employee 컴포넌트는 행의 마지막 항목에 삭제버튼을 보여줌.
 //...한 곳에서 가장 최상위 컴포넌트에서 state 를 관리하는 것이 가장 쉽다는 것을 보여줌.
 //   컴포넌트에 특화된 세부사항인(this.props.onDelete(this.props.employee)) 를 가진
-//   콜백을 촉발함으로써, 컴포넌트간의 행동을 지휘하기 아주 쉬움.*/}				
+//   콜백을 촉발함으로써, 컴포넌트간의 행동을 지휘하기 아주 쉬움.*/}
 					<button onClick={this.handleDelete}>Delete</button>
 				</td>
 			</tr>
