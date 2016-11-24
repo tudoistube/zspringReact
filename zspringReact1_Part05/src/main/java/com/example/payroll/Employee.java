@@ -4,6 +4,7 @@ package com.example.payroll;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,18 +39,41 @@ public class Employee {
 *    또는 갱신하게끔 함.
 *    (컬렉션 자원이 아닌) 개별 자원을 가져올 때, Spring Data REST 는 자동적으로
 *    ETag 응답 헤더를 이 필드값에 붙임.
-*    https://tools.ietf.org/html/rfc7232#section-2.3 *
+*    https://tools.ietf.org/html/rfc7232#section-2.3 
 *
 */	
 	private @Version @JsonIgnore Long version;
 	
+/*
+ * ...associate employees with a manager. 
+ *    In this domain, an employee can have one manager 
+ *    while a manager can have multiple employees:
+ *    The manager attribute is linked via JPA’s @ManyToOne. 
+ *    Manager doesn’t need the @OneToMany 
+ *    because you haven’t defined the need to look that up.
+ *    이 도메인에서, 하나의 manager 는 여러개의 employees 를 가질 수 있는 반면에,
+ *    하나의 employee 는 하나의 manager 를 가질 수 있음.
+ * ...The manager attribute is linked via JPA’s @ManyToOne. 
+ *    Manager doesn’t need the @OneToMany because you haven’t defined the need to 
+ *    look that up.
+ *    manager 속성은 JPA 의 @ManyToOne 으로 연결됨.
+ *    	
+ */
+	private @ManyToOne AccessManager manager; //...added since Part 5.
+	
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description) {
+
+
+	public Employee(String firstName, String lastName, String description, AccessManager manager) {
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
+		this.manager = manager;//...added since Part 5.
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -91,12 +115,21 @@ public class Employee {
 		this.version = version;
 	}
 
+	public AccessManager getManager() {
+		return manager;
+	}
+
+	public void setManager(AccessManager manager) {
+		this.manager = manager;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", description="
-				+ description + ", version=" + version + "]";
-	}
-	
+				+ description + ", version=" + version + ", manager=" + manager + "]";
+	}	
 	
 	
 }

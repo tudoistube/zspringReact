@@ -44,6 +44,18 @@
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		<!-- ...E.added since Part 4 -->
+		<!-- ...S.added since Part 5 
+		     This bring in Spring Boot’s Spring Security starter as well as 
+		     some extra Thymeleaf tags to do security look ups in the web page.-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+		</dependency>
+		<!-- ...E.added since Part 5 -->		
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
