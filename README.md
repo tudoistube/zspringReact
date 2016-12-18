@@ -6,6 +6,7 @@
 * All folders are only recipe to be cooked and mixed with Spring framework3 and React.js in this branch(spring3React_step00).
 * yex01 and yex02 are Spring3 Only.  I will use yex02 to cook and mix Spring framework3 and React.js.
 * zspringReact3_Part03 is Springboot applied by React.js, which I should find a way how to apply React.js to Spring framework3.  
+* z10_sts372 is an incomplete template which I utilised a repository [zreact_eve_porcello](https://github.com/tudoistube/zreact_eve_porcello "zreact_eve_porcello") there is no interface between serverside and client, and only applied React.js for output test only.   
     
 책 보면서 실습한 소스임.  
 공부하면서 올리는 것이어서 틀린 부분이 있을수도 있음(알려주시면 반영하겠음)  
