@@ -1,16 +1,19 @@
-#Spring and React Web Application Part1  
-#Source Document : [React.js and Spring Data REST :: Part 1 - Basic Features ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
-##Reference Document : Self Summary on [React.js and Spring Data REST :: Part 1 - Basic Features ](https://drive.google.com/open?id=1gZ0V8kqUy3ovYW8dx-2-uph2Zi7mYbl0KDQj5FaFoG4 "Example Sources by tudoistube@gmail" )  
-* Read Only.  
-* The web page is Not Dynamic. Need to refresh manually.  
+#Spring3 + React.js  
+#Springboot + React.js ì˜ ì†ŒìŠ¤ë¥¼ ì°¸ì¡°í•´ì„œ Springframework3 ì— ì ìš©í•˜ê¸°.  
+#Use this Document : [React.js and Spring Data REST :: Part 3 - Conditional Operations ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
+#Apply to this source from a book ['ì½”ë“œë¡œ ë°°ìš°ëŠ” ìŠ¤í”„ë§ ì›¹í”„ë¡œì íŠ¸ ì¤‘ Part03.ëŒ“ê¸€ì²˜ë¦¬ ê¹Œì§€ ë°˜ì˜í•œ ì‹¤ìŠµì†ŒìŠ¤'](http://book.naver.com/bookdb/book_detail.nhn?bid=9425458 "a book on Springframework3 and REST Ajax, and I will convert this source into a new one with React.js" ) and the authors' cafe : [Cafe run by Author of this book](http://cafe.naver.com/gugucoding "Cafe run by Author of this book" )  
+##Reference Document : Self Summary on [Springframework3 + React.js](https://docs.google.com/spreadsheets/d/16_7Pk9byKYa-obxdjzqzB94vvY7h4MvIGGptoOxPnBI/edit?usp=sharing "Example Sources by tudoistube@gmail" )  
+* All folders are only recipe to be cooked and mixed with Spring framework3 and React.js in this branch(spring3React_step00).
+* yex01 and yex02 are Spring3 Only.  I will use yex02 to cook and mix Spring framework3 and React.js.
+* zspringReact3_Part03 is Springboot applied by React.js, which I should find a way how to apply React.js to Spring framework3.  
     
-Ã¥ º¸¸é¼­ ½Ç½ÀÇÑ ¼Ò½ºÀÓ.  
-°øºÎÇÏ¸é¼­ ¿Ã¸®´Â °ÍÀÌ¾î¼­ Æ²¸° ºÎºĞÀÌ ÀÖÀ»¼öµµ ÀÖÀ½(¾Ë·ÁÁÖ½Ã¸é ¹İ¿µÇÏ°ÚÀ½)  
-Á¤È®ÇÑ ³»¿ëÀº À§ÀÇ ÀúÀÚÀÇ ¸µÅ©¸¦ ÂüÁ¶ÇÏ½Ã±â ¹Ù¶÷.  
+ì±… ë³´ë©´ì„œ ì‹¤ìŠµí•œ ì†ŒìŠ¤ì„.  
+ê³µë¶€í•˜ë©´ì„œ ì˜¬ë¦¬ëŠ” ê²ƒì´ì–´ì„œ í‹€ë¦° ë¶€ë¶„ì´ ìˆì„ìˆ˜ë„ ìˆìŒ(ì•Œë ¤ì£¼ì‹œë©´ ë°˜ì˜í•˜ê² ìŒ)  
+ì •í™•í•œ ë‚´ìš©ì€ ìœ„ì˜ ì €ìì˜ ë§í¬ë¥¼ ì°¸ì¡°í•˜ì‹œê¸° ë°”ëŒ.  
 
 ---
-React.js ¿Í Java Spring À» »ç¿ëÇØ¼­ ¹º°¡ °øÀÍÀûÀÎ Ãø¸é¿¡ µµ¿òÀÌ µÉ ¼ö ÀÖ´Â °ÍÀ»
-ÇÔ²² ¸¸µå½Ç ºĞÀ» Ã£À½.
+React.js ì™€ Java Spring ì„ ì‚¬ìš©í•´ì„œ ë­”ê°€ ê³µìµì ì¸ ì¸¡ë©´ì— ë„ì›€ì´ ë  ìˆ˜ ìˆëŠ” ê²ƒì„
+í•¨ê»˜ ë§Œë“œì‹¤ ë¶„ì„ ì°¾ìŒ.
 
 I hope to make something good to make our society better.  
 If you are interested in my idea, please send your mail to me.  
