@@ -6,14 +6,14 @@ const ReactDOM = require('react-dom');
 
 const when = require('when'); //...added since Part03.
 
-//...client is custom code that configures rest.js to include support for 
-//   HAL, URI Templates, and other things. 
-//   It also sets the default Accept request header to application/hal+json. 
+//...client is custom code that configures rest.js to include support for
+//   HAL, URI Templates, and other things.
+//   It also sets the default Accept request header to application/hal+json.
 //   You can read the code here.
 const client = require('./client');
 
 //function to hop multiple links by "rel"
-const follow = require('./follow'); 
+const follow = require('./follow');
 
 //...유일하게 하드코딩할 경로임.
 const root = '/api';
@@ -21,7 +21,7 @@ const root = '/api';
 
 
 //...컴포넌트를 정의하는 것에 기초하는 것이 React 임.
-//   하나의 컴포넌트가 여러개의 인스턴스를 담는 부모-자식 관계로 여러 층으로 
+//   하나의 컴포넌트가 여러개의 인스턴스를 담는 부모-자식 관계로 여러 층으로
 //   확장하기에 쉬운 개념임.
 //   먼저, 모든 컴포넌트들에 대한 최상위 컨테이너를 갖는 것이 용이함.
 //...React.createClass({…​}) : React 컴포넌트를 생성하는 메서드임.
@@ -29,36 +29,36 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {employees: [] 
-//...S.PagingAndSortingRepository 사용으로 추가함.		
-						,attributes: [] 
-						,pageSize: 2 
+		this.state = {employees: []
+//...S.PagingAndSortingRepository 사용으로 추가함.
+						,attributes: []
+						,pageSize: 2
 						,links: {}};
 		this.updatePageSize = this.updatePageSize.bind(this);
 		this.onCreate = this.onCreate.bind(this);
 		this.onUpdate = this.onUpdate.bind(this);//...added since Part03.
 		this.onDelete = this.onDelete.bind(this);
 		this.onNavigate = this.onNavigate.bind(this);
-//...E.PagingAndSortingRepository 사용으로 추가함.	
-	}//...E.constructor(props).	
+//...E.PagingAndSortingRepository 사용으로 추가함.
+	}//...E.constructor(props).
 
 	componentDidMount() {
 		this.loadFromServer(this.state.pageSize);
-	}//...E.componentDidMount().	
-	
+	}//...E.componentDidMount().
+
 	loadFromServer(pageSize) {
 /*...follow() 함수는 employees 컬렉션 자원에 접근함.
 //...follow.js 함수 사용으로 root 에서 바로 시작해서 필요한 곳으로 네비게이트 가능함.
 //...client : REST 호출을 하는데 이용되는 객체임.
-//...Data 는 rest.js 인자인 client 를 통해서 로딩됨.		
+//...Data 는 rest.js 인자인 client 를 통해서 로딩됨.
 //   root : 시작하는 root URI.
-//   an array of relationships to navigate along. 
+//   an array of relationships to navigate along.
 //		 Each one can be a string or an object.
-//   The array of relationships can be as simple as ["employees"], 
-//   meaning when the first call is made, look in _links for the relationship (or rel) 
-//   named employees. 
-//   Find its href and navigate to it. 
-//   If there is another relationship in the array, rinse and repeat.*/		
+//   The array of relationships can be as simple as ["employees"],
+//   meaning when the first call is made, look in _links for the relationship (or rel)
+//   named employees.
+//   Find its href and navigate to it.
+//   If there is another relationship in the array, rinse and repeat.*/
 		follow(client, root, [
 /*...'?size=<pageSize>' 는 rel 에 끼울 수 있는 쿼리 변수임.	*/
 			{rel: 'employees', params: {size: pageSize}}]
@@ -98,7 +98,7 @@ class App extends React.Component {
 //   모든 GET promises 가 resolved 될 때 resolved 됨. */
 		}).then(employeePromises => {
 			return when.all(employeePromises);
-/*...데이터를 섞는 방법을 이용하여 UI 상태가 변경되는 곳인 done(employees =>) 으로 감쌈.*/ 
+/*...데이터를 섞는 방법을 이용하여 UI 상태가 변경되는 곳인 done(employees =>) 으로 감쌈.*/
 		}).done(employees => {
 			this.setState({
 				employees: employees,
@@ -107,14 +107,14 @@ class App extends React.Component {
 				links: this.links
 			});
 		});
-	}//...E.loadFromServer(pageSize).	
+	}//...E.loadFromServer(pageSize).
 
 
 	onCreate(newEmployee) {
 		var self = this;
 //...follow() 함수는 POST 작업이 이뤄지는 employees 자원에 대해 네비게이트하는 함수이고,
 //   이 경우, 어떠한 변수를 적용할 필요가 없었고, 그래서 스트링 기반의 배열인 rels 이면 충분함.
-//   이 상황에서, POST 호출이 반환됨.		
+//   이 상황에서, POST 호출이 반환됨.
 		follow(client, root, ['employees']).then(response => {
 			return client({
 				method: 'POST',
@@ -127,12 +127,12 @@ class App extends React.Component {
 			return follow(client, root, [{rel: 'employees', params: {'size': self.state.pageSize}}]);
 //...새로운 데이터는 새로운 페이지에서 보여지는게 일반적이므로 동일한 페이지 크기가 적용된
 //   새로운 데이터 batch 를 가져오기 위해 done() 을 반환함.
-//   사용자가 새롭게 추가된 employee 를 보고자 원할 수 있어서, 하이퍼미디어 컨트롤을 
+//   사용자가 새롭게 추가된 employee 를 보고자 원할 수 있어서, 하이퍼미디어 컨트롤을
 //   이용해서 마지막(last)항목으로 네비게이트할 수 있음.
 		}).done(response => {
 			self.onNavigate(response.entity._links.last.href);
 		});
-	}//...E.onCreate(newEmployee).		
+	}//...E.onCreate(newEmployee).
 
 
 	onUpdate(employee, updatedEmployee) {
@@ -164,9 +164,9 @@ class App extends React.Component {
 	}//...E.onDelete(employee).
 
 //...백엔드에서 페이지를 설정한 PagingAndSortingRepository 를 상속해서 사용했음.
-//  onCreate(newEmployee) 에서 새로운 종업원을 생성하면서 last 페이지로 점핑하는 
+//  onCreate(newEmployee) 에서 새로운 종업원을 생성하면서 last 페이지로 점핑하는
 //  page control 을 사용했음.
-//  이용가능한 네비게이션 링크를 근거로 동적으로 컨트롤을 조정하여 페이지 이동을 할 수 있어서 편리함.	
+//  이용가능한 네비게이션 링크를 근거로 동적으로 컨트롤을 조정하여 페이지 이동을 할 수 있어서 편리함.
 	onNavigate(navUri) {
 		client({
 			method: 'GET',
@@ -193,16 +193,16 @@ class App extends React.Component {
 	}//...E.onNavigate(navUri).
 
 //...새로운 페이지 크기는 모든 navigation links 에 대해 변화를 일으킴.
-//  데이터를 새로 가져오고 처음부터 시작하는 것이 가장 좋음.	
+//  데이터를 새로 가져오고 처음부터 시작하는 것이 가장 좋음.
 	updatePageSize(pageSize) {
 		if (pageSize !== this.state.pageSize) {
 			this.loadFromServer(pageSize);
 		}
 	}//...E.updatePageSize(pageSize).
 
-	
+
 //...render : 화면에 컴포넌트를 그리는 API 임.
-//...state 가 변경되면, render() 이 호출됨.	
+//...state 가 변경되면, render() 이 호출됨.
 	render() {
 		return (
 			<div>
@@ -233,7 +233,7 @@ class CreateDialog extends React.Component {
 	}//...E.constructor(props).
 
 	handleSubmit(e) {
-//...이벤트가 계층으로 부푸는것을 중지시킴.		
+//...이벤트가 계층으로 부푸는것을 중지시킴.
 		e.preventDefault();
 		var newEmployee = {};
 //...동일한 JSON 스키마 attribute 속성을 이용하여 각 <input> 을 찾음.
@@ -244,21 +244,21 @@ class CreateDialog extends React.Component {
 //   실제 DOM 엘리먼트를 얻기 위해서는 React.findDOMNode() 를 이용함.
 			newEmployee[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
 		});
-		
+
 //...onCreate() 콜백을 호출함.
 //   이 함수는 최상위 App.onCreate 내부에 있고 이 React 컴포넌트에 다른 속성으로 제공됐음.
 		this.props.onCreate(newEmployee);
-		
-		// clear out the dialog's inputs		
+
+		// clear out the dialog's inputs
 		this.props.attributes.forEach(attribute => {
-			ReactDOM.findDOMNode(this.refs[attribute]).value = ''; 
+			ReactDOM.findDOMNode(this.refs[attribute]).value = '';
 		});
-		
+
 		// Navigate away from the dialog to hide it.
 		window.location = "#";
 	}//...E.handleSubmit(e).
 
-/*...attributes 속성에서 발견된 JSON 스키마 데이터에 대한 맵핑을 해서 이를 
+/*...attributes 속성에서 발견된 JSON 스키마 데이터에 대한 맵핑을 해서 이를
 //	<p><input></p> 엘리먼트 배열형태로 변환함.*/
 	render() {
 		var inputs = this.props.attributes.map(attribute =>
@@ -268,7 +268,7 @@ class CreateDialog extends React.Component {
 				<input type="text" placeholder={attribute} ref={attribute} className="field" />
 			</p>
 		);
-		
+
 //...최상위의 div 는 대화상자를 여는 버튼에 관한 앵커 태그임.
 //   내장된 div 는 감춰진 대화상자임.
 //			 이 예제에서는 자바스크립트가 아닌 순수한 HTML5 와 CSS3 를 사용함.
@@ -317,7 +317,13 @@ class UpdateDialog extends React.Component {
 
 	render() {
 		var inputs = this.props.attributes.map(attribute =>
+/*...Solved the issue 02 in the repository of 'zspringReact'.
+https://github.com/tudoistube/zspringReact/issues/2
+Set the key value from the data value to the field name, it will avoid the duplicate value.
+before :
 				<p key={this.props.employee.entity[attribute]}>
+after :*/
+        <p key={attribute}>
 					<input type="text" placeholder={attribute}
 						   defaultValue={this.props.employee.entity[attribute]}
 						   ref={attribute} className="field" />
@@ -378,7 +384,7 @@ class EmployeeList extends React.Component {
 		e.preventDefault();
 		this.props.onNavigate(this.props.links.last.href);
 	}//...E.handleNavigation.
-	
+
 	handleInput(e) {
 		e.preventDefault();
 //...React 의 findDOMNode() 헬퍼함수를 통해서 <input> 태그의 ref 속성을 이용하여
@@ -392,16 +398,16 @@ class EmployeeList extends React.Component {
 		} else {
 			ReactDOM.findDOMNode(this.refs.pageSize).value = pageSize.substring(0, pageSize.length - 1);
 		}
-	}//...E.handleInput(e).	
-	
+	}//...E.handleInput(e).
+
 	render() {
 		var employees = this.props.employees.map(employee =>
-/*...employee._links.self.href 와 employee 로 부터 값을 받음.	
+/*...employee._links.self.href 와 employee 로 부터 값을 받음.
 //   (http://localhost:8080/api/employees/1)
-//...★Whenever you work with Spring Data REST, 
-//		 the self link IS the key for a given resource. 
-//   React needs a unique identifer for child nodes, 
-//		 and _links.self.href is perfect.*/		
+//...★Whenever you work with Spring Data REST,
+//		 the self link IS the key for a given resource.
+//   React needs a unique identifer for child nodes,
+//		 and _links.self.href is perfect.*/
 				<Employee key={employee.entity._links.self.href}
 						  employee={employee}
 						  attributes={this.props.attributes}
@@ -409,9 +415,9 @@ class EmployeeList extends React.Component {
 						  onDelete={this.props.onDelete}/>
 		);
 
-/*...it still transforms this.props.employees into an array of <Element /> components. 
+/*...it still transforms this.props.employees into an array of <Element /> components.
 //   Then it builds up an array of navLinks, an array of HTML buttons.
-//...HAL 실행결과 나타난 link 에 해당하는 주소 속성값 유무에 따라 해당 버튼을 만드는 것 같음.*/			
+//...HAL 실행결과 나타난 link 에 해당하는 주소 속성값 유무에 따라 해당 버튼을 만드는 것 같음.*/
 		var navLinks = [];
 		if ("first" in this.props.links) {
 			navLinks.push(<button key="first" onClick={this.handleNavFirst}>&lt;&lt;</button>);
@@ -447,8 +453,8 @@ class EmployeeList extends React.Component {
 					</tbody>
 				</table>
 				<div>
-{/*...React 는 XML 기반이므로, 왼쪽화살표태그(<)를 button태그 엘리먼트 안에 넣을 수 없으므로, 
- 인코드된 버전으로 사용해야함.*/}		
+{/*...React 는 XML 기반이므로, 왼쪽화살표태그(<)를 button태그 엘리먼트 안에 넣을 수 없으므로,
+ 인코드된 버전으로 사용해야함.*/}
 					{navLinks}
 				</div>
 			</div>
@@ -464,11 +470,11 @@ class Employee extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleDelete = this.handleDelete.bind(this);
-	}//...E.constructor(props).	
+	}//...E.constructor(props).
 
 	handleDelete() {
 		this.props.onDelete(this.props.employee);
-	}//...E.handleDelete().	
+	}//...E.handleDelete().
 
 	render() {
 		return (

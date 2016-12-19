@@ -431,7 +431,13 @@ class UpdateDialog extends React.Component {
  */
 	render() {
 		var inputs = this.props.attributes.map(attribute =>
+/*...Solved the issue 02 in the repository of 'zspringReact'.
+https://github.com/tudoistube/zspringReact/issues/2
+Set the key value from the data value to the field name, it will avoid the duplicate value.
+before :
 				<p key={this.props.employee.entity[attribute]}>
+after :*/
+                 <p key={attribute}>
 					<input type="text" placeholder={attribute}
 						   defaultValue={this.props.employee.entity[attribute]}
 						   ref={attribute} 
