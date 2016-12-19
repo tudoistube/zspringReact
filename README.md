@@ -1,4 +1,4 @@
-#Spring and React Web Application Part3 :: Current status is Error.  
+#Spring and React Web Application Part3  
 #Source Document : [React.js and Spring Data REST :: Part 3 - Conditional Operations ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
 ##Reference Document : Self Summary on [React.js and Spring Data REST :: Part 3 - Conditional Operations ](https://docs.google.com/spreadsheets/d/1gZ0V8kqUy3ovYW8dx-2-uph2Zi7mYbl0KDQj5FaFoG4/edit#gid=456934870 "Example Sources by tudoistube@gmail" )  
   
