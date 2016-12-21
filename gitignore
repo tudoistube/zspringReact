@@ -72,7 +72,16 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
-
+#...npm package folders
+.idea/
+.tmp/
+node_modules/
+npm-debug.log
+*.iml
+bundle.js
+bundle.js.map
+zbundle.js
+zbundle.js.map
 
 ### Eclipse ###
 

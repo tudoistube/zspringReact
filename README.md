@@ -1,5 +1,5 @@
-#Spring3 + React.js  
-#Springboot + React.js 의 소스를 참조해서 Springframework3 에 적용하기.  
+#Spring3 + React.js : spring3React_step00  : Ingredients ^^...
+#Springboot + React.js 의 소스를 참조해서 Springframework3 에 적용할 재료.  
 #Use this Document : [React.js and Spring Data REST :: Part 3 - Conditional Operations ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
 #Apply to this source from a book ['코드로 배우는 스프링 웹프로젝트 중 Part03.댓글처리 까지 반영한 실습소스'](http://book.naver.com/bookdb/book_detail.nhn?bid=9425458 "a book on Springframework3 and REST Ajax, and I will convert this source into a new one with React.js" ) and the authors' cafe : [Cafe run by Author of this book](http://cafe.naver.com/gugucoding "Cafe run by Author of this book" )  
 ##Reference Document : Self Summary on [Springframework3 + React.js](https://docs.google.com/spreadsheets/d/16_7Pk9byKYa-obxdjzqzB94vvY7h4MvIGGptoOxPnBI/edit?usp=sharing "Example Sources by tudoistube@gmail" )  
