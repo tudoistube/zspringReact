@@ -20,15 +20,21 @@ import java.util.Date;
  *
  */
 
-public class BoardVO {
+public class BoardVO4JSON {
 	
 	private Integer bno;
 	private String title;
 	private String content;
-	private String writer;
-	private Date regdate;
-	private int view_count;		
+	private String writer;	
 		
+	public BoardVO4JSON(Integer bno, String title, String content, String writer) {
+		super();
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+	}
+	
 	public Integer getBno() {
 		return bno;
 	}
@@ -53,23 +59,10 @@ public class BoardVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public Date getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
-	}
-	public int getView_count() {
-		return view_count;
-	}
-	public void setView_count(int view_count) {
-		this.view_count = view_count;
-	}
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title 
-				+ ", content=" + content + ", writer=" + writer 
-				+ ", regdate=" + regdate + ", view_count=" + view_count + "]";
+				+ ", content=" + content + ", writer=" + writer + "]";
 	}	
 	
 	

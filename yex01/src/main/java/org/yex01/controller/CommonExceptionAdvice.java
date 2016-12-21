@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * ...		ex) http://localhost:8080/z/zboard/read?bno=36 강제로 예외를 발생시켜봄.
  * ...3. @ResponseStatus 이용한 Http상태 코드 처리.
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class CommonExceptionAdvice {
 
 	private static final Logger logger = LoggerFactory.getLogger(CommonExceptionAdvice.class);

@@ -1,6 +1,9 @@
 package org.yex01.controller;
 //...192p.
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -11,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.yex01.domain.BoardVO;
+import org.yex01.domain.BoardVO4JSON;
 import org.yex01.domain.Criteria;
 import org.yex01.domain.PageMaker;
 import org.yex01.service.IF_BoardService;
@@ -179,6 +184,26 @@ public class BoardController {
 		logger.info("read called......................");
 		model.addAttribute(service.read(bno));
 	}
+	
+	/*
+	 * ...117p.http://localhost:8080/start/doJSON
+	 * ...{"name":"zweb.샘플상품","price":30000.0}
+	 * ...Advanced Rest Client 또는 크롬 검사::Network::doJson::Headers에 보면 아래와 같음.
+	 * ...Request URL:http://localhost:8080/zweb/doJSON
+		  Request Method:GET
+		  Status Code:200 OK
+		  Response Headers :: Content-Type:application/json;charset=UTF-8		  
+	 */
+	@RequestMapping("/readJSON")
+	public @ResponseBody BoardVO4JSON readJSON(){
+
+		Date date = new Date();
+		
+		BoardVO4JSON vo = new BoardVO4JSON(1, "2DoIs2Be", "Direction wins over speed!", "JoyWins");
+		
+		return vo;
+		
+	}	
 
 	/*
 	 * ...292p.페이징 처리가 된 후, 조회 페이지는 다시 목록 페이지로 돌아가기 위해 다음 3가지 정보가 필요함.
