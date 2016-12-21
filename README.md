@@ -1,21 +1,21 @@
 #Spring and React Web Application Part2 
 #Source Document : [React.js and Spring Data REST :: Part 2 - Hypermedia Controls ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
-##Reference Document : Self Summary on [React.js and Spring Data REST :: Part 2 - Basic Features ](https://drive.google.com/open?id=1gZ0V8kqUy3ovYW8dx-2-uph2Zi7mYbl0KDQj5FaFoG4 "Example Sources by tudoistube@gmail" )  
+##Reference Document : Self Summary on [React.js and Spring Data REST :: Part 2 - Basic Features ](https://drive.google.com/open?id=16_7Pk9byKYa-obxdjzqzB94vvY7h4MvIGGptoOxPnBI "Example Sources by tudoistube@gmail" )  
 * Repository interface extends PagingAndSortingRepository which adds extra options to set page size, and also adds navigational links to hop from page to page.  
 * rest.js : that library comes with HAL support.  
 * follow() function makes it possible  now to start from the root and navigate to where requested!  
 * updated the UI to dynamically use page-based hypermedia controls.  
 * Reload the entire list of employees when the page size is updated.    
 * CRUD.  
-* Changes in one tab won¡¯t update anything in the other.  
+* Changes in one tab wonâ€™t update anything in the other.  
     
-Ã¥ º¸¸é¼­ ½Ç½ÀÇÑ ¼Ò½ºÀÓ.  
-°øºÎÇÏ¸é¼­ ¿Ã¸®´Â °ÍÀÌ¾î¼­ Æ²¸° ºÎºĞÀÌ ÀÖÀ»¼öµµ ÀÖÀ½(¾Ë·ÁÁÖ½Ã¸é ¹İ¿µÇÏ°ÚÀ½)  
-Á¤È®ÇÑ ³»¿ëÀº À§ÀÇ ÀúÀÚÀÇ ¸µÅ©¸¦ ÂüÁ¶ÇÏ½Ã±â ¹Ù¶÷.  
+ì±… ë³´ë©´ì„œ ì‹¤ìŠµí•œ ì†ŒìŠ¤ì„.  
+ê³µë¶€í•˜ë©´ì„œ ì˜¬ë¦¬ëŠ” ê²ƒì´ì–´ì„œ í‹€ë¦° ë¶€ë¶„ì´ ìˆì„ìˆ˜ë„ ìˆìŒ(ì•Œë ¤ì£¼ì‹œë©´ ë°˜ì˜í•˜ê² ìŒ)  
+ì •í™•í•œ ë‚´ìš©ì€ ìœ„ì˜ ì €ìì˜ ë§í¬ë¥¼ ì°¸ì¡°í•˜ì‹œê¸° ë°”ëŒ.  
 
 ---
-React.js ¿Í Java Spring À» »ç¿ëÇØ¼­ ¹º°¡ °øÀÍÀûÀÎ Ãø¸é¿¡ µµ¿òÀÌ µÉ ¼ö ÀÖ´Â °ÍÀ»
-ÇÔ²² ¸¸µå½Ç ºĞÀ» Ã£À½.
+React.js ì™€ Java Spring ì„ ì‚¬ìš©í•´ì„œ ë­”ê°€ ê³µìµì ì¸ ì¸¡ë©´ì— ë„ì›€ì´ ë  ìˆ˜ ìˆëŠ” ê²ƒì„
+í•¨ê»˜ ë§Œë“œì‹¤ ë¶„ì„ ì°¾ìŒ.
 
 I hope to make something good to make our society better.  
 If you are interested in my idea, please send your mail to me.  
