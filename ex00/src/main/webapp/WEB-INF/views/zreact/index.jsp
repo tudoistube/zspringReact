@@ -1,5 +1,6 @@
-<!--10p -->
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
   <head>
     <meta charset="utf-8">
@@ -7,17 +8,16 @@
   </head>
 
   <body>
-    <div id="zroot"></div>
+    <h1>Greetings from JoyWins, <h1>
 
     <script>
-    	let zmessage = '${zmessage}';
+     	let zmessage = '${zmessage}';
+     	if (zmessage == 'Merry Christmas^_____^!!!') {
+         	alert(zmessage);
+     	}
+     </script>
 
-    	if (zmessage == 'Merry Christmas^_____^!!!') {
-        alert("Merry Christmas^_____^!!!");
-    	}
-    </script>
-
-
-    <script src="/y/resources/built/bundle.js" type="text/javascript"></script>
+    <div id="zroot"></div>
+    <script src="/xweb/resources/built/bundle.js" type="text/javascript"></script>
   </body>
 </html>

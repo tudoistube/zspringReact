@@ -72,13 +72,6 @@
 	//...방법2.
 	/*...E.by12p.*/
 	
-	/*
-	let zmessage = '${zmessage}';
-	
-	if (zmessage == 'Merry Christmas^_____^!!!') {
-	  alert("receive data from server-side.");
-	}*/
-	
 	// Parent Component
 	var HiWorld = function (_React$Component) {
 	  _inherits(HiWorld, _React$Component);
@@ -95,15 +88,66 @@
 	    //class HiWorld extends Component {
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'h1',
+	        'div',
 	        null,
-	        'Hi, ',
-	        this.props.zmessage
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            '^^Hi, ',
+	            this.props.zmessage
+	          ),
+	          _react2.default.createElement(
+	            ListItem,
+	            { quantity: '6' },
+	            'Bread'
+	          ),
+	          _react2.default.createElement(
+	            ListItem,
+	            { quantity: '30' },
+	            'Eggs'
+	          ),
+	          _react2.default.createElement(
+	            ListItem,
+	            { quantity: '2' },
+	            'Milk'
+	          )
+	        )
 	      );
 	    }
 	  }]);
 	
 	  return HiWorld;
+	}(_react2.default.Component);
+	
+	// Child Component
+	
+	
+	var ListItem = function (_React$Component2) {
+	  _inherits(ListItem, _React$Component2);
+	
+	  function ListItem() {
+	    _classCallCheck(this, ListItem);
+	
+	    return _possibleConstructorReturn(this, (ListItem.__proto__ || Object.getPrototypeOf(ListItem)).apply(this, arguments));
+	  }
+	
+	  _createClass(ListItem, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'li',
+	        null,
+	        this.props.quantity,
+	        ' \xD7 ',
+	        this.props.children
+	      );
+	    }
+	  }]);
+	
+	  return ListItem;
 	}(_react2.default.Component);
 	
 	//render(<HiWorld />, document.getElementById('zroot')); //...방법1.
