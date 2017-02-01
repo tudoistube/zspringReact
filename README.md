@@ -1,6 +1,6 @@
 #Spring and React Web Application Part1  
 #Source Document : [React.js and Spring Data REST :: Part 1 - Basic Features ](https://spring.io/guides/tutorials/react-and-spring-data-rest/ "Example Sources by tudoistube@gmail" )  
-##Reference Document : Self Summary on [React.js and Spring Data REST :: Part 1 - Basic Features ](https://drive.google.com/open?id=1gZ0V8kqUy3ovYW8dx-2-uph2Zi7mYbl0KDQj5FaFoG4 "Example Sources by tudoistube@gmail" )  
+##Reference Document : Self Summary on [React.js and Spring Data REST :: Part 1 - Basic Features ](https://docs.google.com/spreadsheets/d/16_7Pk9byKYa-obxdjzqzB94vvY7h4MvIGGptoOxPnBI/edit#gid=719149830 "Example Sources practised by tudoistube@gmail" )  
 * Read Only.  
 * The web page is Not Dynamic. Need to refresh manually.  
     
